@@ -108,11 +108,6 @@
       100% { text-shadow: 0 0 14px var(--accent); }
     }
 
-    .title-sub {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
     .pill {
       padding: 4px 10px;
       border-radius: 999px;
@@ -325,8 +320,16 @@
       height: 14px;
       background: #4ade80;
       margin-left: 1px;
-      animation: blink 0.9s steps(1) infinite;
-      animation-delay: 2.7s;
+
+      opacity: 0;
+
+      animation:
+        cursorAppear 0s linear forwards 3.15s,
+        blink 0.9s steps(1) infinite 3.15s;
+    }
+
+    @keyframes cursorAppear {
+      to { opacity: 1; }
     }
 
     @keyframes blink {
@@ -358,6 +361,7 @@
     }
   </style>
 </head>
+
 <body>
   <main class="shell">
     <header class="shell-header">
@@ -430,22 +434,5 @@
       <span>Crafted for Supernova GX</span>
     </footer>
   </main>
-
-  <audio id="typeSound" src="https://assets.mixkit.co/sfx/preview/mixkit-soft-ui-click-2577.mp3"></audio>
-  <script>
-    const typeSound = document.getElementById("typeSound");
-
-    function playTypeSound(delay) {
-      setTimeout(() => {
-        typeSound.currentTime = 0;
-        typeSound.play();
-      }, delay);
-    }
-
-    // Match the typing animation delays
-    playTypeSound(700);   // first log line
-    playTypeSound(1400);  // second log line
-    playTypeSound(2100);  // third log line
-  </script>
 </body>
 </html>
