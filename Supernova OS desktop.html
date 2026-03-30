@@ -96,19 +96,21 @@
     border-radius: 12px 12px 0 0;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 12px;
     padding: 0 12px;
     cursor: grab;
   }
 
   .titlebar span {
+    flex: 1;
+    text-align: center;
     font-size: 0.8rem;
     color: var(--text-muted);
   }
 
   .controls {
     display: flex;
-    gap: 10px;
+    gap: 8px;
   }
 
   .controls div {
@@ -118,9 +120,9 @@
     cursor: pointer;
   }
 
-  .min { background: #facc15; }
-  .max { background: #22c55e; }
   .close { background: #ef4444; }
+  .min   { background: #facc15; }
+  .max   { background: #22c55e; }
 
   .window-content {
     padding: 0;
@@ -138,15 +140,30 @@
 
 <body>
 
-<!-- GAMES WINDOW (Supernova FX) -->
-<div id="gamesWin" class="window">
+<!-- DUCKDUCKGO WINDOW -->
+<div id="ddgWin" class="window">
   <div class="titlebar">
-    <span>Supernova FX</span>
     <div class="controls">
+      <div class="close"></div>
       <div class="min"></div>
       <div class="max"></div>
-      <div class="close"></div>
     </div>
+    <span>DuckDuckGo</span>
+  </div>
+  <div class="window-content">
+    <iframe src="https://duckduckgo.com/?q="></iframe>
+  </div>
+</div>
+
+<!-- FX WINDOW -->
+<div id="fxWin" class="window">
+  <div class="titlebar">
+    <div class="controls">
+      <div class="close"></div>
+      <div class="min"></div>
+      <div class="max"></div>
+    </div>
+    <span>Supernova FX</span>
   </div>
   <div class="window-content">
     <iframe src="https://supernova-fx.github.io/"></iframe>
@@ -156,19 +173,19 @@
 <!-- DOCK -->
 <div class="dock">
 
-  <!-- Google (opens new tab) -->
-  <div class="dock-item" onclick="window.open('https://www.google.com', '_blank')">
-    <img src="https://www.google.com/favicon.ico">
-    <span>Google</span>
+  <!-- DuckDuckGo -->
+  <div class="dock-item" onclick="openWindow('ddgWin')">
+    <img src="https://duckduckgo.com/favicon.ico">
+    <span>Search</span>
   </div>
 
-  <!-- Games (floating window) -->
-  <div class="dock-item" onclick="openWindow('gamesWin')">
+  <!-- FX -->
+  <div class="dock-item" onclick="openWindow('fxWin')">
     <img src="https://cdn-icons-png.flaticon.com/512/833/833472.png">
-    <span>Games</span>
+    <span>FX</span>
   </div>
 
-  <!-- GX (opens new tab) -->
+  <!-- GX (new tab) -->
   <div class="dock-item" onclick="window.open('https://sites.google.com/view/supernova-gx/all?authuser=0', '_blank')">
     <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png">
     <span>GX</span>
@@ -208,10 +225,10 @@
     });
 
     // Controls
-    const [min, max, close] = win.querySelectorAll('.controls div');
+    const [close, min, max] = win.querySelectorAll('.controls div');
 
-    min.onclick = () => win.style.display = "none";
     close.onclick = () => win.style.display = "none";
+    min.onclick = () => win.style.display = "none";
 
     max.onclick = () => {
       if (win.classList.contains("maximized")) {
