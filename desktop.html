@@ -535,8 +535,6 @@
   </div>
 </div>
 <script>
-document.querySelectorAll('.window').forEach(initializeWindow);
-
 function openWindow(id) {
   const win = document.getElementById(id);
   win.style.display = "block";
@@ -604,6 +602,8 @@ function initializeWindow(win) {
     }
   };
 }
+
+document.querySelectorAll('.window').forEach(initializeWindow);
 
 function updateClocks() {
   const now = new Date();
@@ -754,12 +754,6 @@ document.getElementById("clearCacheBtn").onclick = () => {
   location.reload();
 };
 
-window.addEventListener("message", (event) => {
-  if (event.data.type === "openGameWindow") {
-    createGameWindow(event.data.url, event.data.name);
-  }
-});
-
 function createGameWindow(url, name) {
   const win = document.createElement("div");
   win.className = "window game-window";
@@ -795,6 +789,13 @@ function createGameWindow(url, name) {
     win.querySelector(".game-loader").remove();
   };
 }
+
+window.addEventListener("message", (event) => {
+  if (event.data.type === "openGameWindow") {
+    createGameWindow(event.data.url, event.data.name);
+  }
+});
 </script>
+
 </body>
 </html>
