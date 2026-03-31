@@ -92,6 +92,7 @@
     color: var(--text-muted);
   }
 
+  /* ⭐ Window + Animation */
   .window {
     position: absolute;
     top: 120px;
@@ -105,17 +106,19 @@
     box-shadow: 0 18px 40px rgba(0,0,0,0.45);
     display: none;
     overflow: hidden;
+
+    opacity: 0;
+    transform: scale(0.92);
+    transition: opacity 0.25s ease, transform 0.25s ease;
   }
 
-  .window.small {
-    width: 320px;
-    height: 220px;
+  .window.open {
+    opacity: 1;
+    transform: scale(1);
   }
 
-  .window.medium {
-    width: 420px;
-    height: 330px;
-  }
+  .window.small { width: 320px; height: 220px; }
+  .window.medium { width: 420px; height: 330px; }
 
   .titlebar {
     height: 34px;
@@ -210,9 +213,7 @@
     transition: background 0.12s ease-out, transform 0.12s ease-out;
   }
 
-  .calc-btn.op {
-    color: var(--accent);
-  }
+  .calc-btn.op { color: var(--accent); }
 
   .calc-btn:hover {
     background: rgba(30,64,175,0.9);
@@ -240,9 +241,7 @@
     font-size: 0.75rem;
   }
 
-  .terminal-input-row span {
-    color: #22c55e;
-  }
+  .terminal-input-row span { color: #22c55e; }
 
   .terminal-input-row input {
     flex: 1;
@@ -342,6 +341,7 @@
 
 <div class="desktop-clock" id="desktopClock"></div>
 
+<!-- ⭐ GAMES WINDOW (now using local games.html) -->
 <div id="fxWin" class="window">
   <div class="titlebar">
     <div class="controls">
@@ -352,10 +352,11 @@
     <span>Games</span>
   </div>
   <div class="window-content">
-    <iframe src="https://supernova-fx.github.io/os/games.html"></iframe>
+    <iframe src="games.html"></iframe>
   </div>
 </div>
 
+<!-- CLOCK -->
 <div id="clockWin" class="window small">
   <div class="titlebar">
     <div class="controls">
@@ -371,6 +372,7 @@
   </div>
 </div>
 
+<!-- CALCULATOR -->
 <div id="calcWin" class="window medium">
   <div class="titlebar">
     <div class="controls">
@@ -410,6 +412,7 @@
   </div>
 </div>
 
+<!-- TERMINAL -->
 <div id="termWin" class="window">
   <div class="titlebar">
     <div class="controls">
@@ -428,6 +431,7 @@
   </div>
 </div>
 
+<!-- THEMES -->
 <div id="themeWin" class="window medium">
   <div class="titlebar">
     <div class="controls">
@@ -461,6 +465,7 @@
   </div>
 </div>
 
+<!-- NOTES -->
 <div id="notesWin" class="window">
   <div class="titlebar">
     <div class="controls">
@@ -475,6 +480,7 @@
   </div>
 </div>
 
+<!-- DOCK -->
 <div class="dock">
 
   <div class="dock-item" onclick="openWindow('fxWin')">
@@ -508,13 +514,21 @@
   </div>
 
 </div>
+
 <script>
+  /* ⭐ OPEN WINDOW WITH ANIMATION */
   function openWindow(id) {
     const win = document.getElementById(id);
     win.style.display = "block";
     win.style.zIndex = Date.now();
+
+    // Trigger fade + scale animation
+    requestAnimationFrame(() => {
+      win.classList.add("open");
+    });
   }
 
+  /* ⭐ DRAGGING + WINDOW CONTROLS */
   document.querySelectorAll('.window').forEach(win => {
     const bar = win.querySelector('.titlebar');
     let offsetX, offsetY, dragging = false;
@@ -540,9 +554,19 @@
 
     const [close, min, max] = win.querySelectorAll('.controls div');
 
-    close.onclick = () => win.style.display = "none";
-    min.onclick = () => win.style.display = "none";
+    /* ⭐ CLOSE WITH ANIMATION */
+    close.onclick = () => {
+      win.classList.remove("open");
+      setTimeout(() => win.style.display = "none", 200);
+    };
 
+    /* ⭐ MINIMIZE (same as close for now) */
+    min.onclick = () => {
+      win.classList.remove("open");
+      setTimeout(() => win.style.display = "none", 200);
+    };
+
+    /* ⭐ MAXIMIZE */
     max.onclick = () => {
       if (win.classList.contains("maximized")) {
         win.classList.remove("maximized");
@@ -562,6 +586,7 @@
     };
   });
 
+  /* ⭐ CLOCK SYSTEM */
   function updateClocks() {
     const now = new Date();
     const h = now.getHours().toString().padStart(2,'0');
@@ -586,6 +611,7 @@
   updateClocks();
   setInterval(updateClocks, 1000);
 
+  /* ⭐ CALCULATOR */
   const calcDisplay = document.getElementById('calcDisplay');
   let calcBuffer = "0";
   let calcLastOp = null;
@@ -597,8 +623,7 @@
 
   function handleCalcKey(key) {
     if (!isNaN(key)) {
-      if (calcBuffer === "0") calcBuffer = key;
-      else calcBuffer += key;
+      calcBuffer = calcBuffer === "0" ? key : calcBuffer + key;
     } else if (key === ".") {
       if (!calcBuffer.includes(".")) calcBuffer += ".";
     } else if (key === "C") {
@@ -638,12 +663,12 @@
 
   document.querySelectorAll('.calc-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      const key = btn.getAttribute('data-key');
-      handleCalcKey(key);
+      handleCalcKey(btn.getAttribute('data-key'));
     });
   });
   updateCalcDisplay();
 
+  /* ⭐ TERMINAL */
   const termOutput = document.getElementById('termOutput');
   const termInput = document.getElementById('termInput');
 
@@ -705,6 +730,7 @@
     }
   });
 
+  /* ⭐ THEMES */
   document.querySelectorAll('.theme-card').forEach(card => {
     card.addEventListener('click', () => {
       const theme = card.getAttribute('data-theme');
@@ -716,6 +742,7 @@
   const savedTheme = localStorage.getItem("supernova_theme");
   if (savedTheme) document.body.className = savedTheme;
 
+  /* ⭐ NOTES */
   const notesArea = document.getElementById('notesArea');
   const NOTES_KEY = "supernova_os_notes";
 
