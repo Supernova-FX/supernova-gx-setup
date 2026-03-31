@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      const savedTitle = localStorage.getItem("cloakTitle");
+      const savedIcon = localStorage.getItem("cloakIcon");
+
+      if (savedTitle) document.title = savedTitle;
+
+      if (savedIcon) {
+        let iconLink = document.querySelector("link[rel~='icon']");
+        if (!iconLink) {
+          iconLink = document.createElement("link");
+          iconLink.rel = "icon";
+          document.head.appendChild(iconLink);
+        }
+        iconLink.href = savedIcon;
+      }
+    });
+  </script>
+  <meta charset="UTF-8">
+  <title>Supernova FX</title>
+  <link rel="icon" href="icons8-star-64.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="overlay"></div>
+  <div class="content">
+    <p>Only one star shines the brightest...</p>
+    <h1>Supernova FX: Games</h1>
+
+    <div style="display: flex; gap: 12px; justify-content: center;">
+      <button class="gx-button" onclick="window.location.href='https://bit.ly/supernovagx'">Visit Supernova GX</button>
+      <button class="gx-button" onclick="window.location.href='blocker.html'">Go to the Blocker</button>
+      <button class="gx-button" onclick="window.location.href='settings.html'">⚙️ Settings</button>
+    </div>
+
+    <div class="game-grid">
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/1/index.html')">🧩 1</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/1v1lol/index.html')">⚔️ 1v1.LOL</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/1v1space/')">🚀 1v1.Space</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/10-minutes-till-dawn/')">🌘 10 Minutes Till Dawn</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/100ng/index.html')">🏓 100 Player Pong</button>
+      <button onclick="launchStealth('https://www.twoplayergames.org/')">🌐 2 Player Games</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/2048/')">🔢 2048</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/2048-multitask/')">🧠 2048 Multitask</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/9007199254740992/')">🧮 9007199254740992</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/')">🌐 3kh0</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/adarkroom/index.html')">🌑 A Dark Room</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/achievementunlocked/index.html')">🔓 Achievement Unlocked</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/adrenalinechallenge/index.html')">🏍️ Adrenaline Challenge</button>
+      <button onclick="launchStealth('https://agar.live')">🦠 Agar Live</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/ages-of-conflict/index.html')">🌍 Ages of Conflict</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/alienhominid/index.html')">👾 Alien Hominid</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/amidst-the-clouds/index.html')">☁️ Amidst the Clouds</button>
+      <button onclick="launchStealth('https://www.friv.cm/among-us/fullscreen/')">👽 Among Us</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/avalanche/index.html')">🏔️ Avalanche</button>
+      <button onclick="launchStealth('https://www.friv.cm/bacon-may-die/fullscreen/')">🥓 Bacon May Die</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/backrooms/index.html')">🚪 Backrooms</button>
+      <button onclick="launchStealth('https://badegg.io/')">🥚 Bad Egg</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/bad-ice-cream/index.html')">🍦 Bad Ice Cream</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/bad-ice-cream-2/index.html')">🍦 Bad Ice Cream 2</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/bad-ice-cream-3/index.html')">🍦 Bad Ice Cream 3</button>
+      <button onclick="launchStealth('https://www.friv.cm/baldis-basics-online/fullscreen/')">📚 Baldi's Basics</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/basketball-stars/index.html')">🏀 Basketball Stars</button>
+      <button onclick="launchStealth('https://basketbros.io/')">🏀 Basket Bros</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/battleforgondor/index.html')">🛡️ Battle for Gondor</button>
+      <button onclick="launchStealth('https://jcw87.github.io/c2-sans-fight/')">💀 Bad Time Simulator (Sans Fight)</button>
+      <button onclick="launchStealth('https://bigshotboxing.gitlab.io/')">🥊 Big Shot Boxing</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/bigredbutton/index.html')">🔴 Big Red Button</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/blacholesquare/index.html')">🕳️ Black Hole Square</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/blackknight/index.html')">⚔️ Black Knight</button>
+      <button onclick="launchStealth('https://reunbozdo.github.io/')">🧱 Block Blast</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/bloonstd/index.html')">🎈 Bloons TD</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/bloonstd2/index.html')">🎈 Bloons TD 2</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/bloxors/index.html')">🧊 Bloxors</button>
+      <button onclick="launchStealth('https://dinosaur-game.io/blumgi-rocket')">🚀 Blumgi Rocket</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/bob-the-robber/index.html')">🕵️ Bob the Robber</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/bobtherobber2/index.html')">🕵️ Bob the Robber 2</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/boxhead2play/index.html')">📦 Box Head</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/breakingthebank/index.html')">🏦 Breaking The Bank</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/btts/index.html')">🏢 Big Tower Tiny Square</button>
+      <button onclick="launchStealth('https://browser.lol/create')">🌐 Browser.lol</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/burger-and-frights/index.html')">🍔 Burger & Frights</button>
+      <button onclick="launchStealth('https://sweetcrush.vercel.app/')">🍬 Candy Crush</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/cannon-basketball-4/index.html')">🏀 Cannon Basketball 4</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/canyondefense/index.html')">🛡️ Canyon Defense</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/cars-simulator/index.html')">🚗 Cars Simulator</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/cell-machine/index.html')">🧬 Cell Machine</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/championarcher/index.html')">🏹 Champion Archer</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/circlo/index.html')">⚪ circloO</button>
+      <button onclick="launchStealth('https://classwork.cc/')">📚 Classwork.cc</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/cluster-rush/index.html')">🚚 Cluster Rush</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/connect3/index.html')">🔗 Connect 3</button>
+      <button onclick="launchStealth('https://3kh0isgood.github.io/projects/cookie-clicker/index.html')">🍪 Cookie Clicker</button>
+      <button onclick="launchStealth('https://coreball.io/')">🎯 Core Ball</button>
+      <button onclick="launchStealth('https://stealth-ashy-silk.vercel.app/service/hvtrs8%2F-wuw%2Ccpaxyeaoeq.aoo%2F')">🌐 Crazy Games</button>
+      <button onclick="launchStealth('https://cro.vercel.app/')">🐔 Crossy Road</button>
+      <button onclick="launchStealth('https://vocalnutria9174.github.io/deltarune_web/')">❤️ Deltarune</button>
+      <button onclick="launchStealth('https://digdig.io')">⛏️ DigDig.io</button>
+      <button onclick="launchStealth('https://dinosaurgame.app/')">🦖 Dinosaur Game</button>
+      <button onclick="launchStealth('https://stealth-ashy-silk.vercel.app')">🌐 Doge Unblocker V5</button>
+      <button onclick="launchStealth('https://www.friv.cm/drift-boss/fullscreen/')">🚗 Drift Boss</button>
+      <button onclick="launchStealth('https://www.drivemad.com/index.html/')">🚗 Drive Mad</button>
+      <button onclick="launchStealth('https://friv.cm/duck-life/fullscreen/')">🦆 Duck Life</button>
+      <button onclick="launchStealth('https://friv.cm/duck-life-2/fullscreen/')">🦆 Duck Life 2</button>
+      <button onclick="launchStealth('https://www.friv.cm/duck-life-3-evolution/fullscreen/')">🦆 Duck Life 3 Evolution</button>
+      <button onclick="launchStealth('https://www.friv.cm/duck-life-4/fullscreen/')">🦆 Duck Life 4</button>
+      <button onclick="launchStealth('https://www.friv.cm/duck-life-5-treasure-hunt/fullscreen/')">🦆 Duck Life 5 Treasure Hunt</button>
+      <button onclick="launchStealth('https://www.friv.cm/duck-life-6-space/')">🦆 Duck Life 6 Space</button>
+      <button onclick="launchStealth('https://friv.cm/duck-life-battle/fullscreen')">🦆 Duck Life 7 Battle</button>
+      <button onclick="launchStealth('https://www.friv.cm/duck-life-adventure/fullscreen/')">🦆 Duck Life 8 Adventure</button>
+      <button onclick="launchStealth('https://www.friv.cm/eggy-car/fullscreen/')">🥚 Eggy Car</button>
+      <button onclick="launchStealth('https://d21u3ic0kp9e91.cloudfront.net/elasticman/0/index.html')">🧠 Elastic Man</button>
+      <button onclick="launchStealth('https://escape-road.vercel.app/')">🛣️ Escape Road</button>
+      <button onclick="launchStealth('https://faf-games.github.io/')">🎮 FAF Games</button>
+      <button onclick="launchStealth('https://play.fancade.com/')">🕹️ Fancade</button>
+      <button onclick="launchStealth('https://flappybird.io/')">🐦 Flappy Bird</button>
+      <button onclick="launchStealth('https://www.friv.cm/five-nights-at-freddys/fullscreen/')">🎃 FNAF 1</button>
+      <button onclick="launchStealth('https://www.friv.cm/five-nights-at-freddys-2/fullscreen/')">🎃 FNAF 2</button>
+      <button onclick="launchStealth('https://www.friv.cm/five-nights-at-freddys-3/fullscreen/')">🎃 FNAF 3</button>
+      <button onclick="launchStealth('https://www.friv.cm/five-nights-at-freddys-4/fullscreen/')">🎃 FNAF 4</button>
+      <button onclick="launchStealth('https://www.friv.cm/friday-night-funkin/fullscreen/')">🎤 FNF</button>
+      <button onclick="launchStealth('https://unblocked-games.s3.amazonaws.com/index.html')">❄️ FreezeNova</button>
+      <button onclick="launchStealth('https://www.friv.cm/fruit-ninja/fullscreen/')">🍉 Fruit Ninja</button>
+      <button onclick="launchStealth('https://gameis.net/')">🌐 GameIs.net</button>
+      <button onclick="launchStealth('https://www.gamenora.com/')">🌐 Gamenora</button>
+      <button onclick="launchStealth('https://www.gamepix.com/')">🌐 GamePix</button>
+      <button onclick="launchStealth('https://gamesnacks.com/')">🍿 GameSnacks</button>
+      <button onclick="launchStealth('https://www.google.com/?safe=active&ssui=on')">🕵️ Google Incognito</button>
+      <button onclick="launchStealth('https://geometrydash-lite.io/')">📐 Geometry Dash</button>
+      <button onclick="launchStealth('https://www.friv.cm/helix-jump/fullscreen/')">🌀 Helix Jump</button>
+      <button onclick="launchStealth('https://www.friv.cm/idle-breakout/fullscreen/')">🧱 Idle Breakout</button>
+      <button onclick="launchStealth('https://www.friv.cm/madalin-stunt-cars-2/fullscreen/')">🚘 Madalin Stunt Cars 2</button>
+      <button onclick="launchStealth('https://www.friv.cm/merge-cakes/fullscreen/')">🍰 Merge Cakes</button>
+      <button onclick="launchStealth('https://mytcgcollection.com/')">🃏 My TCG Collection</button>
+      <button onclick="launchStealth('https://www.friv.cm/monkey-mart/fullscreen/')">🛒 Monkey Mart</button>
+      <button onclick="launchStealth('https://www.friv.cm/moto-x3m/fullscreen/')">🏍️ Moto X3M</button>
+      <button onclick="launchStealth('https://www.friv.cm/moto-x3m-2/fullscreen/')">🏍️ Moto X3M 2</button>
+      <button onclick="launchStealth('https://www.friv.cm/moto-x3m-3/fullscreen/')">🏍️ Moto X3M 3</button>
+      <button onclick="launchStealth('https://www.friv.cm/moto-x3m-4-winter/fullscreen/')">❄️ Moto X3M 4: Winter</button>
+      <button onclick="launchStealth('https://www.friv.cm/moto-x3m-5-pool-party/fullscreen/')">🏖️ Moto X3M 5: Pool Party</button>
+      <button onclick="launchStealth('https://www.friv.cm/moto-x3m-6-spooky/fullscreen/')">🎃 Moto X3M 6: Spooky</button>
+      <button onclick="launchStealth('https://www.friv.cm/paper-io/fullscreen/')">📄 Paper.io</button>
+      <button onclick="launchStealth('https://www.friv.cm/paper-io-2/fullscreen/')">📄 Paper.io 2</button>
+      <button onclick="launchStealth('https://www.friv.cm/parking-fury/fullscreen/')">🅿️ Parking Fury</button>
+      <button onclick="launchStealth('https://www.friv.cm/parking-fury-2/fullscreen/')">🅿️ Parking Fury 2</button>
+      <button onclick="launchStealth('https://www.friv.cm/parking-fury-3/fullscreen/')">🅿️ Parking Fury 3</button>
+      <button onclick="launchStealth('https://www.friv.cm/retro-bowl/fullscreen/')">🏈 Retro Bowl</button>
+      <button onclick="launchStealth('https://www.friv.cm/rooftop-snipers/fullscreen/')">🔫 Rooftop Snipers</button>
+      <button onclick="launchStealth('https://www.friv.cm/run/fullscreen/')">🏃 Run</button>
+      <button onclick="launchStealth('https://www.friv.cm/shell-shockers/fullscreen/')">💣 Shell Shockers</button>
+      <button onclick="launchStealth('https://www.friv.cm/slope/fullscreen/')">🌌 Slope</button>
+      <button onclick="launchStealth('https://www.friv.cm/smash-karts/fullscreen/')">🏎️ Smash Karts</button>
+      <button onclick="launchStealth('https://banana-livid.vercel.app/lbannana-assets/html/stickman-hook/index.html')">🪝 Stickman Hook</button>
+      <button onclick="launchStealth('https://www.friv.cm/temple-run/fullscreen/')">🏃 Temple Run</button>
+      <button onclick="launchStealth('https://www.friv.cm/tunnel-rush/fullscreen/')">🌪️ Tunnel Rush</button>
+      <button onclick="launchStealth('https://wordle-vanilla.vercel.app/')">🔤 Wordle</button>
+      <button onclick="launchStealth('https://www.friv.cm/zombs-royale/fullscreen/')">🧟 Zombs Royale</button>      
+    </div>
+  </div>
+
+  <script>
+    function launchStealth(url) {
+      const win = window.open('about:blank', '_blank');
+      const doc = win.document;
+      doc.write(`
+        <html>
+          <head>
+            <title>Supernova FX Games</title>
+            <style>
+              html, body {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                background-color: #000;
+              }
+              iframe {
+                border: none;
+                width: 100%;
+                height: 100%;
+              }
+            </style>
+          </head>
+          <body>
+            <iframe src="${url}" allowfullscreen></iframe>
+          </body>
+        </html>
+      `);
+      doc.close();
+    }
+  </script>
+</body>
+</html>
