@@ -377,10 +377,11 @@
       <div class="min"></div>
       <div class="max"></div>
     </div>
-    <span>Games</span>
+    <span id="gamesTitle">Games</span>
   </div>
-  <div class="window-content">
-    <div id="gamesGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;max-height:100%;overflow:auto;"></div>
+
+  <div class="window-content" id="gamesContent" style="padding:0;">
+    <div id="gamesGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;padding:12px;overflow:auto;"></div>
   </div>
 </div>
 
@@ -568,18 +569,20 @@ function initializeWindow(win) {
   const [close, min, max] = win.querySelectorAll('.controls div');
 
   close.onclick = () => {
+    if (win.id === "fxWin") {
+      renderGamesGrid();
+    }
     win.classList.remove("open");
-    setTimeout(() => win.remove(), 200);
     setTimeout(() => {
-      if (!document.querySelectorAll(".game-window").length) {
-        document.querySelector(".dock-item:nth-child(1)").classList.remove("playing");
-      }
-    }, 250);
+      win.style.display = "none";
+    }, 200);
   };
 
   min.onclick = () => {
     win.classList.remove("open");
-    setTimeout(() => win.style.display = "none", 200);
+    setTimeout(() => {
+      win.style.display = "none";
+    }, 200);
   };
 
   max.onclick = () => {
@@ -764,8 +767,120 @@ const GAMES = [
   { name: "2048", emoji: "🔢", url: "https://3kh0isgood.github.io/projects/2048/" },
   { name: "2048 Multitask", emoji: "🧠", url: "https://3kh0isgood.github.io/projects/2048-multitask/" },
   { name: "9007199254740992", emoji: "🧮", url: "https://3kh0isgood.github.io/projects/9007199254740992/" },
-  { name: "3kh0", emoji: "🌐", url: "https://3kh0isgood.github.io/" }
-  // continue adding from your full list with emoji + url
+  { name: "3kh0", emoji: "🌐", url: "https://3kh0isgood.github.io/" },
+  { name: "A Dark Room", emoji: "🌑", url: "https://3kh0isgood.github.io/projects/adarkroom/index.html" },
+  { name: "Achievement Unlocked", emoji: "🔓", url: "https://3kh0isgood.github.io/projects/achievementunlocked/index.html" },
+  { name: "Adrenaline Challenge", emoji: "🏍️", url: "https://3kh0isgood.github.io/projects/adrenalinechallenge/index.html" },
+  { name: "Agar Live", emoji: "🦠", url: "https://agar.live" },
+  { name: "Ages of Conflict", emoji: "🌍", url: "https://3kh0isgood.github.io/projects/ages-of-conflict/index.html" },
+  { name: "Alien Hominid", emoji: "👾", url: "https://3kh0isgood.github.io/projects/alienhominid/index.html" },
+  { name: "Amidst the Clouds", emoji: "☁️", url: "https://3kh0isgood.github.io/projects/amidst-the-clouds/index.html" },
+  { name: "Among Us", emoji: "👽", url: "https://www.friv.cm/among-us/fullscreen/" },
+  { name: "Avalanche", emoji: "🏔️", url: "https://3kh0isgood.github.io/projects/avalanche/index.html" },
+  { name: "Bacon May Die", emoji: "🥓", url: "https://www.friv.cm/bacon-may-die/fullscreen/" },
+  { name: "Backrooms", emoji: "🚪", url: "https://3kh0isgood.github.io/projects/backrooms/index.html" },
+  { name: "Bad Egg", emoji: "🥚", url: "https://badegg.io/" },
+  { name: "Bad Ice Cream", emoji: "🍦", url: "https://3kh0isgood.github.io/projects/bad-ice-cream/index.html" },
+  { name: "Bad Ice Cream 2", emoji: "🍦", url: "https://3kh0isgood.github.io/projects/bad-ice-cream-2/index.html" },
+  { name: "Bad Ice Cream 3", emoji: "🍦", url: "https://3kh0isgood.github.io/projects/bad-ice-cream-3/index.html" },
+  { name: "Baldi's Basics", emoji: "📚", url: "https://www.friv.cm/baldis-basics-online/fullscreen/" },
+  { name: "Basketball Stars", emoji: "🏀", url: "https://3kh0isgood.github.io/projects/basketball-stars/index.html" },
+  { name: "Basket Bros", emoji: "🏀", url: "https://basketbros.io/" },
+  { name: "Battle for Gondor", emoji: "🛡️", url: "https://3kh0isgood.github.io/projects/battleforgondor/index.html" },
+  { name: "Bad Time Simulator", emoji: "💀", url: "https://jcw87.github.io/c2-sans-fight/" },
+  { name: "Big Shot Boxing", emoji: "🥊", url: "https://bigshotboxing.gitlab.io/" },
+  { name: "Big Red Button", emoji: "🔴", url: "https://3kh0isgood.github.io/projects/bigredbutton/index.html" },
+  { name: "Black Hole Square", emoji: "🕳️", url: "https://3kh0isgood.github.io/projects/blacholesquare/index.html" },
+  { name: "Black Knight", emoji: "⚔️", url: "https://3kh0isgood.github.io/projects/blackknight/index.html" },
+  { name: "Block Blast", emoji: "🧱", url: "https://reunbozdo.github.io/" },
+  { name: "Bloons TD", emoji: "🎈", url: "https://3kh0isgood.github.io/projects/bloonstd/index.html" },
+  { name: "Bloons TD 2", emoji: "🎈", url: "https://3kh0isgood.github.io/projects/bloonstd2/index.html" },
+  { name: "Bloxors", emoji: "🧊", url: "https://3kh0isgood.github.io/projects/bloxors/index.html" },
+  { name: "Blumgi Rocket", emoji: "🚀", url: "https://dinosaur-game.io/blumgi-rocket" },
+  { name: "Bob the Robber", emoji: "🕵️", url: "https://3kh0isgood.github.io/projects/bob-the-robber/index.html" },
+  { name: "Bob the Robber 2", emoji: "🕵️", url: "https://3kh0isgood.github.io/projects/bobtherobber2/index.html" },
+  { name: "Box Head", emoji: "📦", url: "https://3kh0isgood.github.io/projects/boxhead2play/index.html" },
+  { name: "Breaking The Bank", emoji: "🏦", url: "https://3kh0isgood.github.io/projects/breakingthebank/index.html" },
+  { name: "Big Tower Tiny Square", emoji: "🏢", url: "https://3kh0isgood.github.io/projects/btts/index.html" },
+  { name: "Browser.lol", emoji: "🌐", url: "https://browser.lol/create" },
+  { name: "Burger & Frights", emoji: "🍔", url: "https://3kh0isgood.github.io/projects/burger-and-frights/index.html" },
+  { name: "Candy Crush", emoji: "🍬", url: "https://sweetcrush.vercel.app/" },
+  { name: "Cannon Basketball 4", emoji: "🏀", url: "https://3kh0isgood.github.io/projects/cannon-basketball-4/index.html" },
+  { name: "Canyon Defense", emoji: "🛡️", url: "https://3kh0isgood.github.io/projects/canyondefense/index.html" },
+  { name: "Cars Simulator", emoji: "🚗", url: "https://3kh0isgood.github.io/projects/cars-simulator/index.html" },
+  { name: "Cell Machine", emoji: "🧬", url: "https://3kh0isgood.github.io/projects/cell-machine/index.html" },
+  { name: "Champion Archer", emoji: "🏹", url: "https://3kh0isgood.github.io/projects/championarcher/index.html" },
+  { name: "circloO", emoji: "⚪", url: "https://3kh0isgood.github.io/projects/circlo/index.html" },
+  { name: "Classwork.cc", emoji: "📚", url: "https://classwork.cc/" },
+  { name: "Cluster Rush", emoji: "🚚", url: "https://3kh0isgood.github.io/projects/cluster-rush/index.html" },
+  { name: "Connect 3", emoji: "🔗", url: "https://3kh0isgood.github.io/projects/connect3/index.html" },
+  { name: "Cookie Clicker", emoji: "🍪", url: "https://3kh0isgood.github.io/projects/cookie-clicker/index.html" },
+  { name: "Core Ball", emoji: "🎯", url: "https://coreball.io/" },
+  { name: "Crazy Games", emoji: "🌐", url: "https://stealth-ashy-silk.vercel.app/service/hvtrs8%2F-wuw%2Ccpaxyeaoeq.aoo%2F" },
+  { name: "Crossy Road", emoji: "🐔", url: "https://cro.vercel.app/" },
+  { name: "Deltarune", emoji: "❤️", url: "https://vocalnutria9174.github.io/deltarune_web/" },
+  { name: "DigDig.io", emoji: "⛏️", url: "https://digdig.io" },
+  { name: "Dinosaur Game", emoji: "🦖", url: "https://dinosaurgame.app/" },
+  { name: "Doge Unblocker V5", emoji: "🌐", url: "https://stealth-ashy-silk.vercel.app" },
+  { name: "Drift Boss", emoji: "🚗", url: "https://www.friv.cm/drift-boss/fullscreen/" },
+  { name: "Drive Mad", emoji: "🚗", url: "https://www.drivemad.com/index.html/" },
+  { name: "Duck Life", emoji: "🦆", url: "https://friv.cm/duck-life/fullscreen/" },
+  { name: "Duck Life 2", emoji: "🦆", url: "https://friv.cm/duck-life-2/fullscreen/" },
+  { name: "Duck Life 3 Evolution", emoji: "🦆", url: "https://www.friv.cm/duck-life-3-evolution/fullscreen/" },
+  { name: "Duck Life 4", emoji: "🦆", url: "https://www.friv.cm/duck-life-4/fullscreen/" },
+  { name: "Duck Life 5 Treasure Hunt", emoji: "🦆", url: "https://www.friv.cm/duck-life-5-treasure-hunt/fullscreen/" },
+  { name: "Duck Life 6 Space", emoji: "🦆", url: "https://www.friv.cm/duck-life-6-space/" },
+  { name: "Duck Life 7 Battle", emoji: "🦆", url: "https://friv.cm/duck-life-battle/fullscreen" },
+  { name: "Duck Life 8 Adventure", emoji: "🦆", url: "https://www.friv.cm/duck-life-adventure/fullscreen/" },
+  { name: "Eggy Car", emoji: "🥚", url: "https://www.friv.cm/eggy-car/fullscreen/" },
+  { name: "Elastic Man", emoji: "🧠", url: "https://d21u3ic0kp9e91.cloudfront.net/elasticman/0/index.html" },
+  { name: "Escape Road", emoji: "🛣️", url: "https://escape-road.vercel.app/" },
+  { name: "FAF Games", emoji: "🎮", url: "https://faf-games.github.io/" },
+  { name: "Fancade", emoji: "🕹️", url: "https://play.fancade.com/" },
+  { name: "Flappy Bird", emoji: "🐦", url: "https://flappybird.io/" },
+  { name: "FNAF 1", emoji: "🎃", url: "https://www.friv.cm/five-nights-at-freddys/fullscreen/" },
+  { name: "FNAF 2", emoji: "🎃", url: "https://www.friv.cm/five-nights-at-freddys-2/fullscreen/" },
+  { name: "FNAF 3", emoji: "🎃", url: "https://www.friv.cm/five-nights-at-freddys-3/fullscreen/" },
+  { name: "FNAF 4", emoji: "🎃", url: "https://www.friv.cm/five-nights-at-freddys-4/fullscreen/" },
+  { name: "FNF", emoji: "🎤", url: "https://www.friv.cm/friday-night-funkin/fullscreen/" },
+  { name: "FreezeNova", emoji: "❄️", url: "https://unblocked-games.s3.amazonaws.com/index.html" },
+  { name: "Fruit Ninja", emoji: "🍉", url: "https://www.friv.cm/fruit-ninja/fullscreen/" },
+  { name: "GameIs.net", emoji: "🌐", url: "https://gameis.net/" },
+  { name: "Gamenora", emoji: "🌐", url: "https://www.gamenora.com/" },
+  { name: "GamePix", emoji: "🌐", url: "https://www.gamepix.com/" },
+  { name: "GameSnacks", emoji: "🍿", url: "https://gamesnacks.com/" },
+  { name: "Google Incognito", emoji: "🕵️", url: "https://www.google.com/?safe=active&ssui=on" },
+  { name: "Geometry Dash", emoji: "📐", url: "https://geometrydash-lite.io/" },
+  { name: "Helix Jump", emoji: "🌀", url: "https://www.friv.cm/helix-jump/fullscreen/" },
+  { name: "Idle Breakout", emoji: "🧱", url: "https://www.friv.cm/idle-breakout/fullscreen/" },
+  { name: "Madalin Stunt Cars 2", emoji: "🚘", url: "https://www.friv.cm/madalin-stunt-cars-2/fullscreen/" },
+  { name: "Merge Cakes", emoji: "🍰", url: "https://www.friv.cm/merge-cakes/fullscreen/" },
+  { name: "My TCG Collection", emoji: "🃏", url: "https://mytcgcollection.com/" },
+  { name: "Monkey Mart", emoji: "🛒", url: "https://www.friv.cm/monkey-mart/fullscreen/" },
+  { name: "Moto X3M", emoji: "🏍️", url: "https://www.friv.cm/moto-x3m/fullscreen/" },
+  { name: "Moto X3M 2", emoji: "🏍️", url: "https://www.friv.cm/moto-x3m-2/fullscreen/" },
+  { name: "Moto X3M 3", emoji: "🏍️", url: "https://www.friv.cm/moto-x3m-3/fullscreen/" },
+  { name: "Moto X3M 4 Winter", emoji: "❄️", url: "https://www.friv.cm/moto-x3m-4-winter/fullscreen/" },
+  { name: "Moto X3M 5 Pool Party", emoji: "🏖️", url: "https://www.friv.cm/moto-x3m-5-pool-party/fullscreen/" },
+  { name: "Moto X3M 6 Spooky", emoji: "🎃", url: "https://www.friv.cm/moto-x3m-6-spooky/fullscreen/" },
+  { name: "Paper.io", emoji: "📄", url: "https://www.friv.cm/paper-io/fullscreen/" },
+  { name: "Paper.io 2", emoji: "📄", url: "https://www.friv.cm/paper-io-2/fullscreen/" },
+  { name: "Parking Fury", emoji: "🅿️", url: "https://www.friv.cm/parking-fury/fullscreen/" },
+  { name: "Parking Fury 2", emoji: "🅿️", url: "https://www.friv.cm/parking-fury-2/fullscreen/" },
+  { name: "Parking Fury 3", emoji: "🅿️", url: "https://www.friv.cm/parking-fury-3/fullscreen/" },
+  { name: "Retro Bowl", emoji: "🏈", url: "https://www.friv.cm/retro-bowl/fullscreen/" },
+  { name: "Rooftop Snipers", emoji: "🔫", url: "https://www.friv.cm/rooftop-snipers/fullscreen/" },
+  { name: "Run", emoji: "🏃", url: "https://www.friv.cm/run/fullscreen/" },
+  { name: "Shell Shockers", emoji: "💣", url: "https://www.friv.cm/shell-shockers/fullscreen/" },
+  { name: "Slope", emoji: "🌌", url: "https://www.friv.cm/slope/fullscreen/" },
+  { name: "Smash Karts", emoji: "🏎️", url: "https://www.friv.cm/smash-karts/fullscreen/" },
+  { name: "Stickman Hook", emoji: "🪝", url: "https://banana-livid.vercel.app/lbannana-assets/html/stickman-hook/index.html" },
+  { name: "Temple Run", emoji: "🏃", url: "https://www.friv.cm/temple-run/fullscreen/" },
+  { name: "Tunnel Rush", emoji: "🌪️", url: "https://www.friv.cm/tunnel-rush/fullscreen/" },
+  { name: "Wordle", emoji: "🔤", url: "https://wordle-vanilla.vercel.app/" },
+  { name: "Zombs Royale", emoji: "🧟", url: "https://www.friv.cm/zombs-royale/fullscreen/" }
+];
+
 ];
 
 let favs = JSON.parse(localStorage.getItem("supernova_game_favs") || "[]");
@@ -774,10 +889,21 @@ function saveFavs() {
   localStorage.setItem("supernova_game_favs", JSON.stringify(favs));
 }
 
-function renderGames() {
+function renderGamesGrid() {
   const grid = document.getElementById("gamesGrid");
-  if (!grid) return;
+  const content = document.getElementById("gamesContent");
+  const title = document.getElementById("gamesTitle");
+
+  if (!grid || !content || !title) return;
+
+  title.textContent = "Games";
+  title.style.cursor = "default";
+  title.onclick = null;
+
+  content.innerHTML = "";
+  content.appendChild(grid);
   grid.innerHTML = "";
+
   GAMES.forEach(game => {
     const card = document.createElement("div");
     card.style.padding = "10px";
@@ -801,8 +927,8 @@ function renderGames() {
 
     const top = document.createElement("div");
     top.style.display = "flex";
-    top.style.alignItems = "center";
     top.style.justifyContent = "space-between";
+    top.style.alignItems = "center";
 
     const left = document.createElement("div");
     left.style.display = "flex";
@@ -813,12 +939,12 @@ function renderGames() {
     icon.textContent = game.emoji || "🎮";
     icon.style.fontSize = "1.4rem";
 
-    const title = document.createElement("div");
-    title.textContent = game.name;
-    title.style.fontSize = "0.9rem";
+    const name = document.createElement("div");
+    name.textContent = game.name;
+    name.style.fontSize = "0.9rem";
 
     left.appendChild(icon);
-    left.appendChild(title);
+    left.appendChild(name);
 
     const fav = document.createElement("button");
     fav.textContent = favs.includes(game.name) ? "★" : "☆";
@@ -836,7 +962,7 @@ function renderGames() {
         favs.push(game.name);
       }
       saveFavs();
-      renderGames();
+      renderGamesGrid();
     };
 
     top.appendChild(left);
@@ -855,11 +981,11 @@ function renderGames() {
 
     play.onclick = (e) => {
       e.stopPropagation();
-      createGameWindow(game.url, game.name);
+      openGameInsideWindow(game);
     };
 
     card.onclick = () => {
-      createGameWindow(game.url, game.name);
+      openGameInsideWindow(game);
     };
 
     card.appendChild(top);
@@ -868,44 +994,23 @@ function renderGames() {
   });
 }
 
-function createGameWindow(url, name) {
-  const win = document.createElement("div");
-  win.className = "window game-window";
-  win.style.left = "160px";
-  win.style.top = "160px";
-  win.style.width = "720px";
-  win.style.height = "480px";
-  win.style.zIndex = Date.now();
+function openGameInsideWindow(game) {
+  const content = document.getElementById("gamesContent");
+  const title = document.getElementById("gamesTitle");
+  if (!content || !title) return;
 
-  win.innerHTML = `
-    <div class="titlebar">
-      <div class="controls">
-        <div class="close"></div>
-        <div class="min"></div>
-        <div class="max"></div>
-      </div>
-      <span>${name}</span>
-    </div>
-    <div class="window-content">
-      <div class="game-loader">Loading game...</div>
-      <iframe src="${url}"></iframe>
-    </div>
-  `;
-
-  document.body.appendChild(win);
-  initializeWindow(win);
-  requestAnimationFrame(() => win.classList.add("open"));
-
-  document.querySelector(".dock-item:nth-child(1)").classList.add("playing");
-
-  const iframe = win.querySelector("iframe");
-  iframe.onload = () => {
-    const loader = win.querySelector(".game-loader");
-    if (loader) loader.remove();
+  title.textContent = "Back";
+  title.style.cursor = "pointer";
+  title.onclick = () => {
+    renderGamesGrid();
   };
+
+  content.innerHTML = `
+    <iframe src="${game.url}" style="width:100%;height:100%;border:none;"></iframe>
+  `;
 }
 
-renderGames();
+renderGamesGrid();
 </script>
 
 </body>
